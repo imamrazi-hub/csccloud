@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+app = FastAPI(title="CSC Cloud Backend")
 
-@app.get("/")
-def read_root():
-    return {"message": "Backend API is running"}
-  
+@app.get("/health")
+def health():
+    return {"status": "Backend is healthy"}
+
+@app.get("/api/message")
+def message():
+    return {"message": "Hello from Python Backend via REST over HTTP (TCP)"}
