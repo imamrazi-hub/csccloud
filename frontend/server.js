@@ -1,18 +1,27 @@
-const express = require("express");
-const axios = require("axios");
+import express from "express";
+import fetch from "node-fetch";
 
 const app = express();
 const PORT = 3000;
 
+// In docker-compose, backend is reachable by service name "backend"
+const BACKEND_URL = "http://backend:8000/api/message";
+
 app.get("/", async (req, res) => {
   try {
-    const response = await axios.get("http://backend:8000");
-    res.send(`<h1>Frontend Running</h1><p>${response.data.message}</p>`);
-  } catch (error) {
-    res.send("Error connecting to backend");
+    const r = await fetch(BACKEND_URL);
+    const data = await r.json();
+
+    res.send(`
+      <h2>CSC Cloud Frontend (Node/JavaScript)</h2>
+      <p>Backend Response:</p>
+      <pre>${JSON.stringify(data, null, 2)}</pre>
+    `);
+  } catch (e) {
+    res.status(500).send(`Error contacting backend: ${e}`);
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Frontend running on port ${PORT}`);
 });
