@@ -1,9 +1,8 @@
 {
-  "name": "frontend",
-  "version": "1.0.0",
-  "main": "server.js",
+  "name": "csccloud-frontend",
+  "type": "module",
   "dependencies": {
     "express": "^4.18.2",
-    "axios": "^1.5.0"
+    "node-fetch": "^3.3.2"
   }
 }
