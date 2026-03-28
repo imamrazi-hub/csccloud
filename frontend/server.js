@@ -1,27 +1,44 @@
 import express from "express";
-import fetch from "node-fetch";
+import { MongoClient } from "mongodb";
 
 const app = express();
 const PORT = 3000;
 
-// In docker-compose, backend is reachable by service name "backend"
-const BACKEND_URL = "http://backend:8000/api/message";
+// MongoDB connection
+const url = "mongodb://mongo:27017";
+const client = new MongoClient(url);
+const dbName = "sharksDB";
 
-app.get("/", async (req, res) => {
-  try {
-    const r = await fetch(BACKEND_URL);
-    const data = await r.json();
+let db;
+
+async function start() {
+  await client.connect();
+  db = client.db(dbName);
+
+  const collection = db.collection("sharks");
+
+  // Insert data if empty
+  if ((await collection.countDocuments()) === 0) {
+    await collection.insertMany([
+      { name: "Great White Shark" },
+      { name: "Hammerhead Shark" }
+    ]);
+  }
+
+  app.get("/", async (req, res) => {
+    const sharks = await collection.find().toArray();
 
     res.send(`
-      <h2>CSC Cloud Frontend (Node/JavaScript)</h2>
-      <p>Backend Response:</p>
-      <pre>${JSON.stringify(data, null, 2)}</pre>
+      <h1>Shark Info - Abdul Razak Mansaray</h1>
+      <ul>
+        ${sharks.map(s => `<li>${s.name}</li>`).join("")}
+      </ul>
     `);
-  } catch (e) {
-    res.status(500).send(`Error contacting backend: ${e}`);
-  }
-});
+  });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Frontend running on port ${PORT}`);
-});
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+start();
