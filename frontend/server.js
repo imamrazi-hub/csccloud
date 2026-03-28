@@ -4,20 +4,14 @@ import { MongoClient } from "mongodb";
 const app = express();
 const PORT = 3000;
 
-// MongoDB connection
 const url = "mongodb://mongo:27017";
 const client = new MongoClient(url);
-const dbName = "sharksDB";
-
-let db;
 
 async function start() {
   await client.connect();
-  db = client.db(dbName);
-
+  const db = client.db("sharkDB");
   const collection = db.collection("sharks");
 
-  // Insert data if empty
   if ((await collection.countDocuments()) === 0) {
     await collection.insertMany([
       { name: "Great White Shark" },
@@ -37,7 +31,7 @@ async function start() {
   });
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log("Server running...");
   });
 }
 
