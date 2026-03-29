@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Node.js app with MongoDB (Shark Info App)",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
