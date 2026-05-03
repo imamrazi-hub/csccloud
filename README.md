@@ -6,23 +6,18 @@
 The Cloud Engineer Roadmap System is a full-stack, containerized application designed to guide users from beginner level to becoming job-ready Cloud Engineers.
 
 This system provides:
-- Personalized learning roadmap  
-- Career preparation guidance  
-- Interview tracking  
-- Job and mentorship tracking  
-
-It also demonstrates a real-world cloud-native architecture using Docker containers and is deployable on CloudLab.
-
+1. Personalized learning roadmap
+2. Career preparation guidance
+3. Interview tracking
+4. Job and mentorship tracking  
 ---
 
 ## 🎯 Objectives
-- Guide users from zero knowledge to Cloud Engineer level  
-- Provide structured learning roadmap  
-- Recommend resources (books, articles, YouTube)  
+- Guide users to becoming Cloud Engineers
+- Provide a structured learning roadmap  
+- Recommend resources  
 - Help with CV, LinkedIn, cover letter  
 - Track interviews, jobs, mentorship  
-- Demonstrate cloud deployment using Docker  
-
 ---
 
 ## 🏗️ System Architecture
@@ -51,7 +46,6 @@ MongoDB
 ```bash
 docker compose up --build
 ```
-
 ---
 
 ## 🌍 Access
@@ -72,8 +66,8 @@ csccloud/
 
 ---
 
-## 🎥 Demo Steps
-1. Run docker compose  
+## 🎥 Demo Steps:
+1. Run Docker Compose  
 2. Show containers (docker ps)  
 3. Open browser  
 4. Create user  
