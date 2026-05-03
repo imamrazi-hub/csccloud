@@ -3,7 +3,7 @@
 ![System Architecture](https://github.com/imamrazi-hub/csccloud/blob/6a999cfdee7e57f9b3e3970e980db157574df5b2/2%20components%20interraction.png)
 
 ## 📌 Overview
-The Cloud Engineer Roadmap System is a full-stack, containerized application designed to guide users from beginner level to becoming job-ready Cloud Engineers.
+The Cloud Engineer Roadmap System is a full-stack, containerised application designed to guide users from beginner to job-ready Cloud Engineer.
 
 This system provides:
 1. Personalized learning roadmap
