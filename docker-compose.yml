@@ -1,0 +1,38 @@
+services:
+  mongo:
+    image: mongo:6
+    container_name: cloudroadmap-mongo
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - cloudroadmap-net
+
+  backend:
+    build: ./backend
+    container_name: cloudroadmap-backend
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    networks:
+      - cloudroadmap-net
+
+  frontend:
+    build: ./frontend
+    container_name: cloudroadmap-frontend
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - cloudroadmap-net
+
+volumes:
+  mongo-data:
+
+networks:
+  cloudroadmap-net:
